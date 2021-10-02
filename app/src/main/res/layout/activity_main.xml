@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+un linear layout tiene siempre la propiedad orientation
+que sirve para decir como las views van a colocarse en
+el activity, además tienen otra propiedad importante que
+es el gravity que dice donde se va a empezar a posicionar
+los views, despues con respecto a ese view los demás,
+si ponemos una tuberia | podemos decir alineate en x
+y despues en y alineate de x manera etc es como una
+tuberia en linux, encadenas las posiciones.
+junto con el peso en las vistas tenemos que indicarle
+al layout cuanto suman los pesos con la etiqueta:
+android:weightSum="x" donde x es la suma de todos los pesos
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity"
+    android:weightSum="4">
+
+    <!--
+    lo interesante y mas importante es que sea un diseño
+    líquido para eso los botones no se tienen que adaptar
+    al texto sino tener un tamaño fijo en la pantalla
+    para eso ponemos 0dp al width de los botones, y
+    utilizar un PESO, que es el PESO que va a ocupar
+    en el layout, para eso se utiliza la propiedad
+    android:layout_weight="x" donde x es el peso que tiene
+    ese view.
+    Tenemos un truco para calcular el % de pantalla que queremos
+    ocupar con cada view haciendo una regla de 3, sumamos todos los pesos
+    en nuestro caso 2 + 1 + 1 = 4, el 4 es el 100%, entonces si queremos
+    para el primero un 50%, si 4 es 100%, x será 50%, regla de tres directa
+    lo que da un 2. si queremos darle un 40% al segundo y un 10% al tercero,
+    hacemos lo mismo. El resultado esta abajo.
+    LO QUE CONSEGUIMOS ES UN DISEÑO RESPONSIVE!!!! TANTO EN HORIZONTAL
+    COMO EN VERTICAL
+    -->
+    <Button
+        android:id="@+id/boton0"
+        android:text="ESTE BOTÓN ES GRANDÍSIMO"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"/>
+
+    <!--
+     con la etiqueta <Space /> podemos dejar espacios entre
+     las vistas(elementos), tiene que ir entre medias de los
+     views, como vemos aqui tenemos arriba un botón y abajo
+     otro botón y el <Space /> en medio de estos.
+     -->
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:id="@+id/boton1"
+        android:text="ESTE UN POCO MENOS"
+        android:layout_width="0dp"
+        android:layout_weight="1.60"
+        android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:id="@+id/boton2"
+        android:text="ESTE NADA"
+        android:layout_width="0dp"
+        android:layout_weight="0.40"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
